@@ -18,7 +18,7 @@ how you answer and adapts on its own, with no modes to configure.
 | --- | --- | --- |
 | **BeastMode** (`beastmode`) | **Planning** — sharpen a rough idea into a plan worth building | available |
 | **BeastMode Build** (`beastmode-build`) | **Build** — read the plan, build it slice by slice, test it | available |
-| **BeastMode Review** (`beastmode-review`) | **Review** — check the implementation, find security and regression issues | planned |
+| **BeastMode Review** (`beastmode-review`) | **Review** — check the implementation, find real bugs, security holes and regressions | available |
 
 The split is the point: understand the idea → settle the decisions → write the
 plan → build it → review it, each with a clear responsibility. Nothing tries to do
@@ -45,9 +45,12 @@ mkdir -p ~/.claude/skills/beastmode && curl -sL https://raw.githubusercontent.co
 
 # BeastMode Build
 mkdir -p ~/.claude/skills/beastmode-build && curl -sL https://raw.githubusercontent.com/diestelkampconsulting/beastmode/main/skills/beastmode-build/SKILL.md -o ~/.claude/skills/beastmode-build/SKILL.md
+
+# BeastMode Review
+mkdir -p ~/.claude/skills/beastmode-review && curl -sL https://raw.githubusercontent.com/diestelkampconsulting/beastmode/main/skills/beastmode-review/SKILL.md -o ~/.claude/skills/beastmode-review/SKILL.md
 ```
 
-Then type `/beastmode` or `/beastmode-build` in your agent.
+Then type `/beastmode`, `/beastmode-build` or `/beastmode-review` in your agent.
 
 **Cursor** — save a skill as a rule. Create `.cursor/rules/beastmode.mdc` with
 this header, then paste the body of the skill's `SKILL.md` below it:
@@ -79,6 +82,9 @@ that agent's skill/command directory.
 2. Run **`/beastmode-build`** when you have that plan. It reads the plan, confirms
    the slices, then builds them one at a time — testing each slice and protecting
    what already works, checking in with you between slices.
+3. Run **`/beastmode-review`** on a built change before it ships. It reviews the
+   change against the plan, finds the real bugs, security holes and regressions,
+   and ranks them by what actually matters.
 
 ## It's working if
 
@@ -95,7 +101,9 @@ that agent's skill/command directory.
   architecture document for a small script.
 - **BeastMode Build** builds the plan; it doesn't re-plan it (that's BeastMode)
   and it doesn't skip tests to look fast.
-- Neither one settles a question you can only answer by looking at something
+- **BeastMode Review** reviews the change; it reports findings and applies a fix
+  only when you ask, and it won't pad a review with manufactured concerns.
+- None of them settles a question you can only answer by looking at something
   real — for those, they tell you to prototype first.
 
 ## License
