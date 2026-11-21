@@ -1,0 +1,22 @@
+{
+  "name": "diestelkampconsulting",
+  "owner": {
+    "name": "Diestelkamp Consulting GmbH",
+    "url": "https://github.com/diestelkampconsulting"
+  },
+  "description": "BeastMode — plan, build and review software with three small, honest, portable agent skills.",
+  "plugins": [
+    {
+      "name": "beastmode",
+      "source": "./",
+      "description": "Pressure-test an idea, build it slice by slice, review it. Planning / build / review skills for Claude Code, Cursor and any agent.",
+      "category": "engineering",
+      "keywords": [
+        "planning",
+        "engineering",
+        "code-review",
+        "skills"
+      ]
+    }
+  ]
+}

@@ -32,12 +32,34 @@ being built. **BeastMode** spends focused time up front so the build doesn't was
 hours. **BeastMode Build** then builds that plan one working slice at a time,
 tested, without running ahead or breaking what already works.
 
+## What a session feels like
+
+> **You:** I want to let clients book a call from our site.
+>
+> **BeastMode:** Before anything — what proves v1 works: a booking that lands in
+> your calendar, or a lead you follow up by hand? That changes the whole build.
+> Two quick ones:
+> 1. One service and one calendar, or several? *(I'll assume one of each unless
+>    you say otherwise.)*
+> 2. Who must **not** be able to double-book — the client, or you?
+>
+> *…a few rounds later it writes a short `PLAN.md` with thin, end-to-end slices.
+> You run `/beastmode-build` to build the first one, then `/beastmode-review`
+> before it ships.*
+
 ## Install (30 seconds)
 
-Each skill is one file under [`skills/`](./skills). Install only the ones you
-want, where your agent looks for skills.
+Install the whole set as a Claude Code plugin, or drop individual skills — each is
+one file under [`skills/`](./skills) — into any agent.
 
-**Claude Code** — drop a skill in as a personal (all projects) or project skill:
+**Claude Code (plugin — recommended, updates itself):**
+
+```bash
+claude plugin marketplace add diestelkampconsulting/beastmode
+claude plugin install beastmode@diestelkampconsulting
+```
+
+**Claude Code (manual)** — drop a skill in as a personal (all projects) or project skill:
 
 ```bash
 # BeastMode (planning)

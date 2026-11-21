@@ -1,0 +1,27 @@
+{
+  "name": "beastmode",
+  "version": "1.0.0",
+  "description": "BeastMode — pressure-test an idea, build it slice by slice, review it. Three small, portable, honest planning/build/review skills for Claude Code, Cursor and any agent.",
+  "author": {
+    "name": "Diestelkamp Consulting GmbH",
+    "url": "https://github.com/diestelkampconsulting"
+  },
+  "homepage": "https://github.com/diestelkampconsulting/beastmode",
+  "repository": "https://github.com/diestelkampconsulting/beastmode",
+  "license": "MIT",
+  "keywords": [
+    "planning",
+    "engineering",
+    "skills",
+    "code-review",
+    "spec",
+    "claude-code",
+    "cursor",
+    "opencode"
+  ],
+  "skills": [
+    "./skills/beastmode",
+    "./skills/beastmode-build",
+    "./skills/beastmode-review"
+  ]
+}
