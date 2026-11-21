@@ -10,6 +10,10 @@
       "name": "beastmode",
       "source": "./",
       "description": "Pressure-test an idea, build it slice by slice, review it. Planning / build / review skills for Claude Code, Cursor and any agent.",
+      "author": {
+        "name": "Diestelkamp Consulting GmbH",
+        "url": "https://github.com/diestelkampconsulting"
+      },
       "category": "engineering",
       "keywords": [
         "planning",
