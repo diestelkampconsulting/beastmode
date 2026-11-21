@@ -4,6 +4,7 @@
   "description": "BeastMode — pressure-test an idea, build it slice by slice, review it. Three small, portable, honest planning/build/review skills for Claude Code, Cursor and any agent.",
   "author": {
     "name": "Diestelkamp Consulting GmbH",
+    "email": "218847130+diestelkampconsulting@users.noreply.github.com",
     "url": "https://github.com/diestelkampconsulting"
   },
   "homepage": "https://github.com/diestelkampconsulting/beastmode",
