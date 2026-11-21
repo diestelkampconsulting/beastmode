@@ -1,57 +1,56 @@
 # BeastMode
 
-**Pressure-test your idea before you build it.**
+**Pressure-test your idea, then build it — carefully.**
 
-BeastMode is a small, portable agent skill. You give it a rough idea; it asks the
-sharp questions, proposes sensible defaults, pushes back where you're about to
-make a mistake, and writes a short, honest plan you can build from. Then it stops.
+BeastMode is a small family of portable agent skills for people who build real
+software. Each skill is a single markdown file. They work with Claude Code,
+Cursor, opencode, and any agent that reads an instruction file — no setup, no API
+key, no dependencies that can silently break.
 
-It works with Claude Code, Cursor, opencode, and any agent that reads a markdown
-instruction file. One file, no setup, no API key, no dependencies that can
-silently break.
+The skills share one philosophy: **direct, honest, and simple.** They push back
+when you're about to make a mistake, decide the small stuff for you, and stay out
+of your way. They're equally useful whether you're new or senior — each one reads
+how you answer and adapts on its own, with no modes to configure.
+
+## The skills
+
+| Skill | Role | Status |
+| --- | --- | --- |
+| **BeastMode** (`beastmode`) | **Planning** — sharpen a rough idea into a plan worth building | available |
+| **BeastMode Build** (`beastmode-build`) | **Build** — read the plan, build it slice by slice, test it | available |
+| **BeastMode Review** (`beastmode-review`) | **Review** — check the implementation, find security and regression issues | planned |
+
+The split is the point: understand the idea → settle the decisions → write the
+plan → build it → review it, each with a clear responsibility. Nothing tries to do
+everything at once.
 
 ## Why
 
-Most software goes wrong before the first line of code: it gets built before the
-problem, the risks, and the scope are clear. BeastMode spends thirty focused
-minutes up front so the build doesn't waste thirty hours. It is deliberately
-**not** an architect, a project manager, a QA engineer, or a code generator — it
-plans, and hands off to build.
-
-## What makes it different
-
-- **Equally useful for beginners and pros.** It reads how you answer and adapts
-  on its own — more explanation when you're unsure, more speed when you're not.
-  No modes to configure.
-- **Highest-stakes questions first**, 2–3 at a time. Never a wall of questions.
-- **Decides the small stuff for you** and says so, so you only spend attention on
-  choices that are hard to reverse.
-- **Knows when talking won't help** and tells you to build a throwaway instead.
-- **Honest.** It challenges over-engineering, feature creep, and bloated stacks —
-  and agrees in one line when you're right.
-- **Simple by design.** A weekend script gets a checklist, not a five-phase
-  process.
+Most software goes wrong before and during the build: it gets started before the
+problem, the risks and the scope are clear, and then it drifts off the plan while
+being built. **BeastMode** spends focused time up front so the build doesn't waste
+hours. **BeastMode Build** then builds that plan one working slice at a time,
+tested, without running ahead or breaking what already works.
 
 ## Install (30 seconds)
 
-BeastMode is a single file: [`SKILL.md`](./SKILL.md). Put it where your agent
-looks for skills.
+Each skill is one file under [`skills/`](./skills). Install only the ones you
+want, where your agent looks for skills.
 
-**Claude Code** — drop it in as a personal or project skill:
+**Claude Code** — drop a skill in as a personal (all projects) or project skill:
 
 ```bash
-# personal (all projects)
-mkdir -p ~/.claude/skills/beastmode && curl -sL https://raw.githubusercontent.com/diestelkampconsulting/beastmode/main/SKILL.md -o ~/.claude/skills/beastmode/SKILL.md
+# BeastMode (planning)
+mkdir -p ~/.claude/skills/beastmode && curl -sL https://raw.githubusercontent.com/diestelkampconsulting/beastmode/main/skills/beastmode/SKILL.md -o ~/.claude/skills/beastmode/SKILL.md
 
-# or per project
-mkdir -p .claude/skills/beastmode && cp SKILL.md .claude/skills/beastmode/SKILL.md
+# BeastMode Build
+mkdir -p ~/.claude/skills/beastmode-build && curl -sL https://raw.githubusercontent.com/diestelkampconsulting/beastmode/main/skills/beastmode-build/SKILL.md -o ~/.claude/skills/beastmode-build/SKILL.md
 ```
 
-Then type `/beastmode` in your agent.
+Then type `/beastmode` or `/beastmode-build` in your agent.
 
-**Cursor** — save the skill as a rule. Create
-`.cursor/rules/beastmode.mdc` with this header, then paste the body of
-`SKILL.md` below it:
+**Cursor** — save a skill as a rule. Create `.cursor/rules/beastmode.mdc` with
+this header, then paste the body of the skill's `SKILL.md` below it:
 
 ```md
 ---
@@ -59,26 +58,27 @@ description: Pressure-test an idea before building it, then write a short plan.
 alwaysApply: false
 ---
 
-<paste the body of SKILL.md here>
+<paste the body of skills/beastmode/SKILL.md here>
 ```
 
-Invoke it by asking Cursor to "use the beastmode rule" or by referencing it with
-`@beastmode`.
+Do the same for `beastmode-build` in its own `.mdc` rule.
 
-**opencode and other agents** — anything that reads `AGENTS.md` can use it:
-reference or paste the contents of `SKILL.md` into your project's `AGENTS.md`,
-or into that agent's skill/command directory.
+**opencode and other agents** — anything that reads `AGENTS.md` can use them:
+reference or paste a skill's `SKILL.md` into your project's `AGENTS.md`, or into
+that agent's skill/command directory.
 
-**Any agent at all** — paste the contents of `SKILL.md` into the chat and say
+**Any agent at all** — paste a skill's `SKILL.md` into the chat and say
 "follow this."
 
 ## How to use it
 
-Start it on purpose, in a fresh conversation, when you have an idea worth taking
-seriously — a feature, a product direction, even a decision. You don't need a
-worked-out plan; producing one is the point. Answer honestly, push back when a
-question is off, and say "I don't know" when you don't. The quality of the plan
-depends on the quality of your answers.
+1. Run **`/beastmode`** on purpose when you have an idea worth taking seriously —
+   a feature, a product direction, even a decision. You don't need a worked-out
+   plan; producing one is the point. Answer honestly, push back when a question is
+   off, and say "I don't know" when you don't. It writes a short plan.
+2. Run **`/beastmode-build`** when you have that plan. It reads the plan, confirms
+   the slices, then builds them one at a time — testing each slice and protecting
+   what already works, checking in with you between slices.
 
 ## It's working if
 
@@ -86,25 +86,17 @@ depends on the quality of your answers.
   session you didn't need.
 - You end up somewhere you didn't expect, because a question showed you a decision
   you'd been making without noticing.
-- You could defend every choice in the final plan to someone who wasn't there.
+- The build grows in small, tested steps you can actually review — not one giant
+  untested drop.
 
 ## What it deliberately doesn't do
 
-- It doesn't write production code. It plans, then hands off.
-- It doesn't invent an architecture document for a small script.
-- It can't settle questions you can only answer by looking at something real —
-  for those it tells you to prototype first.
-
-## The family
-
-BeastMode is the planning step of a clean, three-part workflow with clear
-responsibilities. Each is a separate skill, so nothing gets muddled.
-
-| Skill | Role | Status |
-| --- | --- | --- |
-| **BeastMode** | Planning — sharpen the idea, surface risks, write the plan | available |
-| **BeastMode Build** | Read the plan, build it slice by slice, test it | planned |
-| **BeastMode Review** | Check the implementation, find security and regression issues | planned |
+- **BeastMode** plans; it doesn't write production code, and it won't invent an
+  architecture document for a small script.
+- **BeastMode Build** builds the plan; it doesn't re-plan it (that's BeastMode)
+  and it doesn't skip tests to look fast.
+- Neither one settles a question you can only answer by looking at something
+  real — for those, they tell you to prototype first.
 
 ## License
 
